@@ -189,3 +189,143 @@ VALUES ('A1001', 'Mouse', 500, 0, 'C');
 
 
 #ass17
+INSERT INTO Store VALUES ('Loyal World', 'Infy Campus, Mysore', 'Rohan Kumar');
+
+
+#ass18
+INSERT INTO Bill VALUES (1001,'Loyal World',101,'A1001',1000,'20-OCT-15',2)
+
+
+#ass19
+INSERT INTO Supplier VALUES ('S501', 'Avaya Ltd', 9012345678,'Mysore')
+
+ass#3
+select descr, price from item where descr like '%Hard%'
+
+
+#ass4
+SELECT * FROM Quotation WHERE QSTATUS <> 'Accepted'
+
+
+#ass5
+SELECT DESIGNATION, SALARY FROM EmpDetails WHERE DESIGNATION IN ('Manager','Billing Staff')
+
+#ass6
+SELECT ROID, Location FROM RetailOutlet WHERE Managerid IS NULL
+
+
+#ass7
+SELECT OrderId, QuotationId, Status FROM Orders WHERE OrderDate BETWEEN '1-DEC-2014' AND '1-JAN-2015'
+
+
+#ass25
+SELECT ItemCode, Descr, Price FROM Item WHERE 
+Category='B' AND
+Descr LIKE '%Shirt%' 
+OR
+Descr LIKE '%Skirt%' 
+
+
+#ass26
+SELECT DISTINCT DESIGNATION, SALARY FROM EmpDetails
+
+
+#ass27
+SELECT ITEMCODE, DESCR, PRICE FROM ITEM
+
+
+#ass28
+SELECT QUOTATIONID, SNAME FROM Quotation WHERE QSTATUS in ('Accepted','Rejected')
+
+
+#ass29
+SELECT Itemcode, descr, price FROM Item WHERE DESCR LIKE '_r%'
+
+
+#ass30
+SELECT DISTINCT ITEMTYPE FROM ITEM
+
+
+#ass31
+SELECT orderid, quotationid, status, pymtdate FROM Orders WHERE pymtdate IS NULL
+
+
+#ass32
+SELECT DISTINCT ITEMTYPE, CATEGORY FROM ITEM
+
+
+#ass33
+SELECT 
+  EMPID,
+  Salary AS "Current Salary", 
+  Salary*1.10 AS "New Salary", 
+  Salary*0.1 AS "Incremented Amount" 
+FROM EmpDetails
+
+
+#ass34
+INSERT INTO City VALUES('Mysore')
+
+
+#ass35
+INSERT INTO Address VALUES
+(350,'Electronics City','Mysore',570018,'Karnataka')
+
+
+#ass36
+INSERT INTO Article VALUES
+('A1002','Keyboard',1000,10,'B')
+
+
+#ass37
+SELECT quotationid, qdate, quotedprice FROM Quotation WHERE quotedprice>1400 AND quotedprice<2150
+
+
+#ass38
+SELECT  itemtype, descr, price FROM Item WHERE price > 4000
+
+
+#ass39
+SELECT designation, salary FROM EmpDetails WHERE designation IN ('Manager', 'Billing Staff') AND salary BETWEEN 2500 AND 5000
+
+#ex5
+UPDATE Product SET discount=25 WHERE Category In('Sports')
+
+#ex19
+UPDATE Product SET PRICE=50 WHERE PDESC='Trouser' AND CATEGORY='Apparel'
+
+
+#ex20
+UPDATE Salesman SET Sname='Jenny' , Location='Bristol' WHERE Sid IN(3)
+
+#ex6
+DELETE From SaleDetail Where Saleid=1004 
+
+
+#ex22
+DELETE From SaleDetail Where Quantity>5 
+
+
+#ex23
+SELECT Prodid , Pdesc , Category From Product WHERE Category='Electronic' OR upper(Category)='ELECTRONICS' OR lower(Category)='electronics'
+
+#ex24
+SELECT prodid , SUBSTR(Pdesc,1,5) "PDESC_FIVE" , Category from Product
+
+#ex25
+SELECT COUNT(*) AS SALE_COUNT
+FROM Sale
+WHERE Sldate >= ADD_MONTHS(SYSDATE, -40);
+
+
+#ex26
+SELECT NVL(Pdesc,'No Description') "PDESC", discount from Product
+
+
+#ex27
+SELECT prodid , category , price , discount FROM Product ORDER BY Category DESC , Price ASC
+
+
+#ex10
+SELECT prodid , category , discount FROM Product WHERE Category ='Sports' or Category='Apparel' ORDER BY Category ASC,Discount ASC
+
