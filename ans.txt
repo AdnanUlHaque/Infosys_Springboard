@@ -329,3 +329,169 @@ SELECT prodid , category , price , discount FROM Product ORDER BY Category DESC 
 #ex10
 SELECT prodid , category , discount FROM Product WHERE Category ='Sports' or Category='Apparel' ORDER BY Category ASC,Discount ASC
 
+#colass40
+SELECT DISTINCT ITEMTYPE, 
+CASE
+  WHEN PRICE BETWEEN 0 AND 499 THEN 'Cheap'
+  WHEN PRICE BETWEEN 500 AND 1999 THEN 'Affordable'
+  WHEN PRICE BETWEEN 2000 AND 4999 THEN 'Expensive'
+  WHEN PRICE>=500 THEN 'Very Expensive'
+  END AS CLASSIFICATION
+FROM ITEM ORDER BY ITEMTYPE
+
+
+#colass42
+SELECT ORDERID, ROUND(MONTHS_BETWEEN(PYMTDATE, ORDERDATE),2) "No of Months" FROM ORDERS WHERE ROUND(MONTHS_BETWEEN(PYMTDATE, ORDERDATE),2)>0.1 AND STATUS='Delivered';
+
+
+#colass43
+SELECT EMPID, SALARY "Current Salary", ROUND(SALARY*1.2,2) "New Salary", SALARY*0.2 "Incremented Amount" FROM EmpDetails WHERE Designation='Manager'
+
+
+#colass44
+SELECT ITEMCODE FROM ITEM WHERE ABS(QTYONHAND - REORDERLEVEL)>50
+
+
+#ex31
+SELECT PRODID, PDESC, PRICE AS "Old_Price", ROUND(PRICE*0.775,2) AS "New_Price" FROM Product WHERE CATEGORY='Sports'
+
+
+#ex32
+SELECT Saleid, ROUND(MONTHS_BETWEEN(SYSDATE, Sldate), 1) AS MONTH_AGED
+FROM Sale;
+
+
+#ex33
+SELECT ROUND(AVG(PRICE), 2) "Avg", MIN(PRICE) "Min", MAX(PRICE) "Max", COUNT(PRODID) "Total" FROM Product
+
+
+#ex34
+SELECT SNAME||' is from ' ||Location AS "RESULT" FROM SalesMan
+
+
+#ex35
+SELECT TO_CHAR(TO_DATE('Jan/10/2015', 'MON/DD/YYYY'), 'Month') MONTH, TO_NUMBER('2,50,000', '9,99,999') AMOUNT FROM DUAL
+
+
+#ex36
+SELECT PRODID, PDESC, PRICE FROM Product ORDER BY PRICE DESC, PRODID DESC
+
+
+#ex37
+SELECT PRODID, PDESC, PRICE FROM Product ORDER BY PDESC 
+
+
+#ass51
+SELECT Empid, Empname, Salary, ROUND(Salary + (Salary * (CASE
+    WHEN Designation = 'Administrator' THEN 10
+    WHEN Designation = 'Manager' THEN 5
+    WHEN Designation = 'Billing Staff' THEN 20
+    WHEN Designation = 'Security' THEN 25
+    ELSE 2
+    END / 100)), 2) AS IncreasedSalary
+FROM Empdetails;
+
+
+#ass52
+SELECT Empid, Salary,
+  CASE
+    WHEN Salary < 2500 THEN 'Class 3'
+    WHEN Salary >= 2500 AND Salary <= 5000 THEN 'Class 2'
+    ELSE 'Class 1'
+  END AS SALGRADE
+FROM Empdetails;
+
+
+#ass53
+SELECT Itemcode, price "Old Price", ROUND(price * 0.745, 2) "New Price"
+FROM Item
+WHERE itemtype = 'FMCG';
+
+
+#ass54
+SELECT e.Empid AS EMPID, e.Empname AS EMPNAME, e.Worksin AS WORKSIN
+FROM Empdetails e
+INNER JOIN Retailoutlet r ON e.Worksin = r.Roid
+WHERE LOWER(e.Designation) = 'billing staff';
+
+
+#ass8
+SELECT
+  Orderid AS ORDERID,
+  Status AS STATUS,
+  CASE
+    WHEN Amountpaid IS NULL THEN 'Payment yet not done'
+    ELSE Pymtmode
+  END AS PYMTMODE
+FROM Orders;
+
+
+#ass56
+SELECT DESCR FROM ITEM WHERE LENGTH(DESCR)>15
+
+
+#ass57
+SELECT SUBSTR(ROID,2) AS "NUMERICROID" FROM RETAILSTOCK GROUP BY ROID
+
+
+#ass58
+SELECT TO_CHAR(SYSDATE,'Mon/dd/yyyy Day') AS CURRENTDATE FROM DUAL
+
+
+#ass9
+SELECT
+  COUNT(*) AS TOTALORDERSCOUNT,
+  COUNT(Amountpaid) AS PAIDORDERSCOUNT
+FROM Orders;
+
+
+#ass60
+SELECT
+  Orderid,
+  CASE
+    WHEN Pymtdate IS NOT NULL THEN TRUNC(Pymtdate) - TRUNC(Orderdate)
+    ELSE NULL
+  END AS NOOFDAYS
+FROM Orders;
+
+
+#ass61
+SELECT COUNT(DISTINCT Itemtype) AS NOOFITEMTYPES
+FROM Item;SELECT COUNT(DISTINCT Itemtype) AS NOOFITEMTYPES
+FROM Item;
+
+
+#ass10
+SELECT MAX(Salary) AS MaxSal,
+       MIN(Salary) AS MinSal,
+       SUM(Salary) AS TotalSal,
+       AVG(Salary) AS AvgSal
+FROM Empdetails;
+
+
+#ass64
+SELECT COUNT(*) AS NoOfItems
+FROM Item;
+
+#ass65
+SELECT Orderid, -ABS(MONTHS_BETWEEN(Orderdate, Pymtdate)) AS "No of Months"
+FROM Orders;
+
+#ass66
+SELECT SUM(Quotedprice) AS TotalPrice
+FROM Quotation
+WHERE Qstatus = 'Accepted'
+  AND EXTRACT(MONTH FROM Qdate) = 6;
+
+
+#ex29
+SELECT TO_CHAR(Sldate, 'Month') AS Month, COUNT(*) AS Number_Sale
+FROM Sale
+GROUP BY TO_CHAR(Sldate, 'Month')
+ORDER BY Number_Sale DESC;
+
+#ex11
+SELECT Prodid,SUM(Quantity)"QTY_SOLD"
+FROM Saledetail WHERE Quantity>1
+GROUP BY Prodid HAVING COUNT (Prodid)>1;
+
