@@ -737,4 +737,10 @@ FROM SALE S2 INNER JOIN SALESMAN S1 ON S1.SID=s2.SID
 GROUP BY S1.LOCATION, P1.CATEGORY
 
 
-#
+#ex15
+SELECT E.Ename, V.Vehiclename
+FROM Emp E
+LEFT JOIN Empvehicle EV ON E.Empno = EV.Empno
+LEFT JOIN Vehicle V ON EV.Vehicleid = V.Vehicleid;
+
+
