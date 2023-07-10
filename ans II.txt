@@ -147,3 +147,18 @@ WHERE C.CUSTID NOT IN
 
 
 #ass108
+SELECT DISTINCT c.Custid, c.Custname
+FROM Customer c
+JOIN Purchasebill pb ON c.Custid = pb.Custid;
+
+#ass109
+SELECT e.Empno, e.Ename
+FROM Emp e
+WHERE e.Sal > (
+    SELECT AVG(e2.Sal)
+    FROM Emp e2
+    WHERE e2.Deptno = e.Deptno
+)
+
+
+#ass110
