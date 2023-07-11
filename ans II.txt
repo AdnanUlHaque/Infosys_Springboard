@@ -161,4 +161,12 @@ WHERE e.Sal > (
 )
 
 
-#ass110
+#ass111
+UPDATE Emp e
+SET Sal = (
+    SELECT AVG(Sal)
+    FROM Emp
+    WHERE Deptno = e.Deptno
+);
+
+
